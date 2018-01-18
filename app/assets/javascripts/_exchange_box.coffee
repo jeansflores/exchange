@@ -1,5 +1,15 @@
 $(document).ready ->
-  $('form').submit ->
+  $('#quantity').on 'change', ->
+    convert()
+        
+  $('#exchange_local').click ->
+    currency = $('#currency').val()
+    currency_destination = $('#currency_destination').val()
+    $('#currency').prop('value', currency_destination)
+    $('#currency_destination').prop('value', currency)
+    convert()
+
+  convert = ->
     if $('form').attr('action') == '/exchange'
       $.ajax '/exchange',
           type: 'POST'
